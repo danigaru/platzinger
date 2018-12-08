@@ -1,0 +1,55 @@
+<div class="row home">
+    <div class="col-4 col-sm-4">
+        <img src="assets/images/users/1.jpg" class="img-fluid img-thumbnail img-responsive" width="100%" alt="">
+    </div>
+    <div class="col-sm-8">
+        <ul class="list-group">
+            <li class="list-group-item active text-center text-uppercase">Eduardo</li>
+            <li class="list-group-item">Online</li>
+            <li class="list-group-item">Descripcion personal</li>
+            <li class="list-group-item"><input type="text" class="form-control" placeholder="Escribe un mensaje personal"></li>
+        </ul>
+    </div>
+</div>
+
+<form>
+    <div class="form-group main-container">
+        <input name="query" [(ngModel)]="query" class="form-control form-control-lg" type="search" placeholder="Buscar un amigo" aria-label="Search">
+    </div>
+
+</form>
+
+<h3 class="alert alert-success col-sm-12 text-center text-uppercase main-container">Lista de amigos</h3>
+
+<div class="row">
+    <div class="col-sm-6 col-md-4 card-creado" *ngFor="let user of usuario | search: query; ">
+        <div class="card" style="width: 100%">
+            <img class="card-img-top img-thumbnail" src="assets/images/users/1.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{ user['nick'] }}</h5>
+                <p *ngIf="user['subnick']">{{ user['subnick']}}</p>
+                <p>{{ user['email'] }}</p>
+
+                <a [routerLink]="['/conversacion', user['uid']]">
+                    <p class="btn btn-outline-info">
+                        Ir al chat
+                    </p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <h3 class="alert alert-info col-sm-12 text-center text-uppercase main-container">No agregados</h3>
+<div class="card-columns">
+    <div class="card" *ngFor="let user of usuario">
+        <div class="card-body" *ngIf="user['friend'] === false">
+            <h5 class="card-title"> {{ user['nick'] }} </h5>
+            <p class="card-text">
+                <button type="button" class="btn btn-primary">
+                {{ user['email'] }} <span class="badge badge-light"> {{ user['friend'] }} </span>
+              </button>
+            </p>
+        </div>
+    </div>
+</div> -->

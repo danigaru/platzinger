@@ -1,0 +1,71 @@
+.profile .row .imgUserr,
+.imgUserr2 {
+    border-radius: 50%;
+}
+
+.profile .message p {
+    border-radius: 8px;
+}
+
+.conversation {
+    margin-bottom: 60px;
+}
+
+
+/* p.conexion {
+    margin-left: 150px;
+} */
+
+button.i {
+    width: 30%;
+}
+
+i {
+    font-size: 40px;
+    /* display: block; */
+}
+
+button.icon {
+    margin-left: 25px;
+    width: 100%;
+}
+
+button.enviarM {
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .profile .row .imgUserr {
+        width: 90%;
+    }
+    .profile .row .imgUserr2 {
+        width: 90%;
+    }
+    i.face {
+        font-size: 30px;
+    }
+    button.i {
+        width: 20%;
+    }
+    button.icon {
+        margin-left: 20px;
+    }
+    button.enviarM {
+        margin-top: 20px;
+        width: 100%;
+    }
+    i.face {
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .profile .row .imgUserr {
+        width: 50%;
+        border-radius: 50%;
+    }
+    .profile .row .imgUserr2 {
+        width: 100%;
+        border-radius: 50%;
+    }
+}
