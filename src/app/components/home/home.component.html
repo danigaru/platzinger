@@ -4,11 +4,12 @@
     </div>
     <div class="col-sm-8">
         <ul class="list-group">
-            <li class="list-group-item active text-center text-uppercase">Eduardo</li>
+            <li class="list-group-item active text-center text-uppercase">user['email']</li>
             <li class="list-group-item">Online</li>
             <li class="list-group-item">Descripcion personal</li>
             <li class="list-group-item"><input type="text" class="form-control" placeholder="Escribe un mensaje personal"></li>
         </ul>
+        <button (click)="logout()" class="btn btn-outline-info">Salir</button>
     </div>
 </div>
 
@@ -22,15 +23,15 @@
 <h3 class="alert alert-success col-sm-12 text-center text-uppercase main-container">Lista de amigos</h3>
 
 <div class="row">
-    <div class="col-sm-6 col-md-4 card-creado" *ngFor="let user of usuario | search: query; ">
+    <div class="col-sm-6 col-md-4 card-creado" *ngFor="let user of usuario | keys ">
         <div class="card" style="width: 100%">
             <img class="card-img-top img-thumbnail" src="assets/images/users/1.jpg" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title">{{ user['nick'] }}</h5>
-                <p *ngIf="user['subnick']">{{ user['subnick']}}</p>
-                <p>{{ user['email'] }}</p>
+                <h5 class="card-title">{{ usuario[user]['nick'] }}</h5>
+                <p *ngIf="user['subnick']">{{ usuario[user]['subnick']}}</p>
+                <p>{{ usuario[user]['email'] }}</p>
 
-                <a [routerLink]="['/conversacion', user['uid']]">
+                <a [routerLink]="['/conversacion', user]">
                     <p class="btn btn-outline-info">
                         Ir al chat
                     </p>
