@@ -24,6 +24,7 @@
     "@fortawesome/fontawesome-free": "^5.6.0",
     "core-js": "^2.5.4",
     "firebase": "5.7.0",
+    "ngx-image-cropper": "1.2.4",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
   },

@@ -8,6 +8,7 @@ import { PAGES_ROUTING } from './pages.routes';
 
 // services
 import { UserService } from '../services/user.service';
+import { ConversationService } from '../services/conversation.service';
 
 // pipes
 import { SearchPipe } from '../pipes/search.pipe';
@@ -20,6 +21,8 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ConversationComponent } from './conversation/conversation.component';
 import { NavbarComponent } from './menu/navbar.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
     declarations: [
@@ -39,10 +42,13 @@ import { NavbarComponent } from './menu/navbar.component';
         BrowserModule,
         PAGES_ROUTING,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        ImageCropperModule,
+      
     ],
     providers: [
-        UserService
+        UserService,
+        ConversationService
     ]
 })
 

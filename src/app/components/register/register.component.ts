@@ -35,11 +35,10 @@ export class RegisterComponent implements OnInit {
               nick: '',  subnick: '', age: 0, email: this.email, friend: false, uid: this.uid 
             };
 
-            this._userService.saveUsers( this.user )
-            .subscribe( usuarioR => {
+            this._userService.createUser( this.user )
+            .then( usuarioR => {
               console.log(usuarioR);
-            },
-            err => console.log(err));
+            }).catch( err => console.log(err));
 
             alert('Registrado correctamente');
             setTimeout(() => {

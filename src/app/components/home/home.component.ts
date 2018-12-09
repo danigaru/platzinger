@@ -12,9 +12,9 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   query: string;
+  usuario: User[];
   user: User;
 
-  usuario: User[];
   constructor(
     private userService: UserService,
     private _authentication: AuthenticationService,
@@ -24,16 +24,18 @@ export class HomeComponent implements OnInit {
       // this.usuario = this.userService.getFriends();
       this.userService.getUsers().subscribe( (user: User[]) => {
           this.usuario = user;
+
+          console.log(user);
+      });
+      this._authentication.getStatus().subscribe( user => {
+          console.log(user.uid);
+          this.userService.getUser(user['uid']).subscribe( (data: User) => {
+            console.log(data['nick']);
+            this.user = data;
+          });
       });
 
   }
-
-  logout( ) {
-      this._authentication.logout();
-
-      this._router.navigate(['/login']);
-  }
-
 
   ngOnInit() {
   }

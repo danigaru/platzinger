@@ -1,44 +1,49 @@
 <div class="row profile">
     <div class="col-12 col-sm-4">
         <div class="row">
-            <div class="col-6 col-sm-12">
-                <img src="assets/images/users/1.jpg" class="img-fluid img-thumbnail img-responsive" width="100%" alt="">
+            <div class="col-6 col-sm-12" *ngIf="user">
+
+                <img [src]="croppedImage || user.avatar || 'assets/images/users/1.jpg' " />
             </div>
             <div class="col-6 col-sm-12">
                 <h5 class="card-creado">Cambiar foto</h5>
-                <button class="btn btn-outline-success col-12">Subir foto</button>
+                <input type="file" (change)="fileChangeEvent($event)">
             </div>
         </div>
     </div>
-    <div class="col-12 col-sm-8 card-creado">
 
-        <h4>Ingrese su datos personales</h4>
+    <div class="col-12 col-sm-8 card-creado " *ngIf="user ">
 
-        <form action="">
-            <div class="form-group">
-                <input class="form-control form-control-lg" type="text" placeholder="Ingresa nick">
+        <div class="col-sm-9 " *ngIf="user ">
+            <image-cropper [imageChangedEvent]="imageChangedEvent " [maintainAspectRatio]="true " [aspectRatio]="1 / 1 " [resizeToWidth]="128 " format="png " (imageCropped)="imageCropped($event) " (imageLoaded)="imageLoaded() " (loadImageFailed)="loadImageFailed() "></image-cropper>
+
+        </div>
+
+
+        <h4 class="title-up">Ingrese su datos personales</h4>
+
+        <p class="alert alert-success " *ngIf="status ">Datos actualizados correctamente</p>
+
+        <form (ngSubmit)="updateUser(user.uid) ">
+            <div class="form-group ">
+                <input name="nick " [(ngModel)]="user.nick " class="form-control form-control-lg " type="text " placeholder="Ingresa nick ">
             </div>
-            <div class="form-group">
-                <input class="form-control form-control-lg" type="text" placeholder="Ingresa subnick">
+            <div class="form-group ">
+                <input name="subnick " [(ngModel)]="user.subnick " class="form-control form-control-lg " type="text " placeholder="Ingresa subnick ">
             </div>
-            <div class="form-group">
-                <input class="form-control form-control-lg" type="text" placeholder="Ingresa email">
+            <div class="form-group ">
+                <input name="email " [(ngModel)]="user.email " class="form-control form-control-lg " type="text " placeholder="Ingresa email ">
             </div>
-            <div class="form-group">
-                <select class="form-control form-control-lg" name="" id="">
-                 <option value="conectado">Conectado</option>
-                 <option value="desconectado">Desconectado</option>
+            <div class="form-group ">
+                <select class="form-control form-control-lg " name=" " id=" ">
+                 <option value="conectado ">Conectado</option>
+                 <option value="desconectado ">Desconectado</option>
                </select>
             </div>
-            <div class="form-group">
-                <button class="btn btn-outline-primary btn-block">Guardar datos</button>
+            <div class="form-group ">
+                <button class="btn btn-outline-primary m-3 ">Guardar datos</button>
+                <button [routerLink]="[ '/home'] " class="btn btn-outline-danger ">Cancelar</button>
             </div>
         </form>
-        <!-- <ul class="list-group">
-            <li class="list-group-item active text-center text-uppercase">Eduardo</li>
-            <li class="list-group-item">Online</li>
-            <li class="list-group-item">Descripcion personal</li>
-            <li class="list-group-item"><input type="text" class="form-control" placeholder="Escribe un mensaje personal"></li>
-        </ul> -->
     </div>
 </div>
