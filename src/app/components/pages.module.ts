@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 // routes
 import { PAGES_ROUTING } from './pages.routes';
@@ -27,7 +28,7 @@ import { NavbarComponent } from './menu/navbar.component';
         ProfileComponent,
         ConversationComponent,
         NavbarComponent,
-        SearchPipe
+        SearchPipe,
     ],
     exports: [
         PagesComponent,
@@ -37,7 +38,8 @@ import { NavbarComponent } from './menu/navbar.component';
     imports: [
         BrowserModule,
         PAGES_ROUTING,
-        FormsModule
+        FormsModule,
+        HttpClientModule
     ],
     providers: [
         UserService

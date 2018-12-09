@@ -6,6 +6,7 @@ import { PagesComponent } from './pages.component';
 import { HomeComponent } from './home/home.component';
 import { ConversationComponent } from './conversation/conversation.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AuthenticationGuard } from '../services/authentication.guard';
 
 const PAGES_ROUTE: Routes = [
 
@@ -13,10 +14,10 @@ const PAGES_ROUTE: Routes = [
         path: '', component: PagesComponent,
         children: [
 
-            { path: 'home', component: HomeComponent },
+            { path: 'home', component: HomeComponent},
             { path: 'conversacion/:id', component: ConversationComponent },
-            { path: 'perfil', component: ProfileComponent },
-            { path: '**', pathMatch: 'full', redirectTo: '/home' }
+            { path: 'perfil', component: ProfileComponent }
+            // { path: '**', pathMatch: 'full', redirectTo: '/home' }
         ]
     }
 

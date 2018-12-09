@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user.interface';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
@@ -7,20 +8,42 @@ import { User } from '../interfaces/user.interface';
 
 export class UserService {
 
-    friends: any = [
-        { nick: 'Juan', subnick: '@juan', age: 20,  email: 'juan@gmail.com', friend: true, uid: 1 },
-        { nick: 'Pedro', age: 22,  email: 'pedro@hotmail.com', friend: false, uid: 2 },
-        { nick: 'Luis',  age: 26,  email: 'luis@hotmail.com', friend: true, uid: 3 },
-        { nick: 'Daniel', age: 45, email: 'daniel@gmail.com',  friend: false, uid: 4 },
-        { nick: 'Danilo', age: 22, email: 'danilo@gmail.com',  friend: true, uid: 5 },
-      ];
+      urlData = 'https://heroesappli.firebaseio.com/users.json';
+      urlDataUser = 'https://heroesappli.firebaseio.com/users';
+     urlUserUid = 'https://heroesappli.firebaseio.com/users/-LTFOqhSq71Qb1PNXv4u/uid.json';
 
-    constructor() {
+
+    constructor(
+        private _httpClient: HttpClient
+    ) {
         console.log('servicio corriendo');
     }
 
-    getFriends() {
-        return this.friends;
+    saveUsers( user: User) {
+
+        const body = JSON.stringify( user );
+
+        const headers: any = new Headers({
+            'Content-Type': 'application/json'
+        });
+
+        return this._httpClient.post( this.urlData, body, { headers} );
+    }
+
+    getUsers() {
+        return this._httpClient.get( this.urlData );
+    }
+
+    getUser( id: string) {
+
+        const url = `${ this.urlDataUser }/${ id }.json`;
+        return this._httpClient.get( url );
+    }
+
+    getUserUid( id: string, uid: string) {
+
+        const url = `${ this.urlDataUser }/${ id }/${ uid }.json`;
+        return this._httpClient.get( url );
     }
 
 }

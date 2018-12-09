@@ -10,7 +10,6 @@ import { User } from '../../interfaces/user.interface';
 })
 export class ConversationComponent implements OnInit {
 
-  users: any;
   uid: any;
   user: User;
   date = new Date();
@@ -35,11 +34,10 @@ export class ConversationComponent implements OnInit {
 
       this._activatedRoute.params.subscribe( urlId =>  {
         this.uid = urlId['id'];
-        this.users = this.userService.getFriends();
 
-        this.user = this.users.find( (user: User) => user.uid == this.uid );
-
-        console.log(this.user);
+        this.userService.getUser( this.uid ).subscribe( (data: any) => {
+          this.user = data;
+        });
       });
 
   }

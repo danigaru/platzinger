@@ -2,45 +2,44 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+// angular fire 2
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
+
 // modules
 import { PagesModule } from './components/pages.module';
 
 // routes
 import { APP_ROUTING } from './app.routes';
 
-// services
-// import { UserService } from './services/user.service';
-
-// pipes
-// import { SearchPipe } from './pipes/search.pipe';
-
 import { AppComponent } from './app.component';
 
 // components
 import { LoginComponent } from './components/login/login.component';
-// import { HomeComponent } from './components/home/home.component';
-// import { ProfileComponent } from './components/profile/profile.component';
-// import { ConversationComponent } from './components/conversation/conversation.component';
-// import { NavbarComponent } from './components/menu/navbar.component';
+import { RegisterComponent } from './components/register/register.component';
+import { NopagesComponent } from './components/nopages/nopages.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
-    // HomeComponent,
-    // ProfileComponent,
-    // ConversationComponent,
-    // NavbarComponent,
-    // SearchPipe
+    LoginComponent,
+    RegisterComponent,
+    NopagesComponent
   ],
   imports: [
     BrowserModule,
     APP_ROUTING,
     PagesModule,
-    // FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+    AngularFireStorageModule // imports firebase/storage only needed for storage features,
   ],
   providers: [
-    // UserService
   ],
   bootstrap: [AppComponent]
 })
