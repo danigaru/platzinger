@@ -1,6 +1,6 @@
 <div class="row home" *ngIf="user">
     <div class="col-4 col-sm-4">
-        <img src="assets/images/users/1.jpg" class="img-fluid img-thumbnail img-responsive" width="100%" alt="">
+        <img [src]="user['avatar'] || 'assets/images/users/1.jpg'" class="img-fluid img-thumbnail img-responsive" width="100%" alt="">
     </div>
     <div class="col-sm-8">
         <form action="">
@@ -26,7 +26,16 @@
 
 <form>
     <div class="form-group main-container">
-        <input name="query" [(ngModel)]="query" class="form-control form-control-lg" type="search" placeholder="Buscar un amigo" aria-label="Search">
+        <div class="row">
+            <div class="col-10">
+
+                <input name="query" [(ngModel)]="query" class="form-control form-control-lg" type="search" placeholder="Buscar un amigo" aria-label="Search">
+            </div>
+            <div class="col-2">
+
+                <img (click)="open(content)" class="logoFriend" src="assets/img/logo_live_add.png" alt="">
+            </div>
+        </div>
     </div>
 
 </form>
@@ -34,15 +43,15 @@
 <h3 class="alert alert-success col-sm-12 text-center text-uppercase main-container">Lista de amigos</h3>
 
 <div class="row">
-    <div class="col-sm-6 col-md-4 card-creado" *ngFor="let user of usuario | keys ">
-        <div class="card" style="width: 100%">
-            <img class="card-img-top img-thumbnail" src="assets/images/users/1.jpg" alt="Card image cap">
+    <div class="col-sm-6 col-md-4 card-creado" *ngFor="let users of usuario | keys ">
+        <div class="card" style="width: 100%" *ngIf="userUid != users && userUid">
+            <img class="card-img-top img-thumbnail" [src]="usuario[users]['avatar'] || 'assets/images/users/1.jpg'" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title">{{ usuario[user]['nick'] }}</h5>
-                <p *ngIf="user['subnick']">{{ usuario[user]['subnick']}}</p>
-                <p>{{ usuario[user]['email'] }}</p>
+                <h5 class="card-title">{{ usuario[users]['nick'] }}</h5>
+                <p *ngIf="users['subnick']">{{ usuario[users]['subnick']}}</p>
+                <p>{{ usuario[users]['email'] }}</p>
 
-                <a [routerLink]="['/conversacion', user]">
+                <a [routerLink]="['/conversacion', users]">
                     <p class="btn btn-outline-info">
                         Ir al chat
                     </p>
@@ -52,16 +61,28 @@
     </div>
 </div>
 
-<!-- <h3 class="alert alert-info col-sm-12 text-center text-uppercase main-container">No agregados</h3>
-<div class="card-columns">
-    <div class="card" *ngFor="let user of usuario">
-        <div class="card-body" *ngIf="user['friend'] === false">
-            <h5 class="card-title"> {{ user['nick'] }} </h5>
-            <p class="card-text">
-                <button type="button" class="btn btn-primary">
-                {{ user['email'] }} <span class="badge badge-light"> {{ user['friend'] }} </span>
-              </button>
-            </p>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Agregar amigo</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="dateOfBirth">Ingresa correo de tu amigo</label>
+
+                    <input name="friendEmail" type="text" class="form-control" placeholder="Correo" [(ngModel)]="friendEmail" (keyup.enter)="sendRequest()">
+                </div>
+
+            </div>
         </div>
     </div>
-</div> -->
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="sendRequest()">Save</button>
+    </div>
+</ng-template>
+
+<button class="btn btn-outline-primary m-3" (click)="open(content)">Agregar amigo</button>
