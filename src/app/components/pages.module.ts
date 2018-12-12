@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 // routes
 import { PAGES_ROUTING } from './pages.routes';
 
@@ -23,6 +25,8 @@ import { ConversationComponent } from './conversation/conversation.component';
 import { NavbarComponent } from './menu/navbar.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { RequestService } from '../services/request.service';
+
 
 @NgModule({
     declarations: [
@@ -44,11 +48,12 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
         FormsModule,
         HttpClientModule,
         ImageCropperModule,
-      
+        [NgbModule]
     ],
     providers: [
         UserService,
-        ConversationService
+        ConversationService,
+        RequestService
     ]
 })
 

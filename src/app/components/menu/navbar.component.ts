@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
 
 
             if ( data) {
-                this.uid = data['uid'];
+                this.uid = 'uid';
             } else {
                 this.uid = 'none';
                 this._Router.navigate(['/login']);
