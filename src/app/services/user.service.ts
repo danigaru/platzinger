@@ -3,7 +3,6 @@ import { User } from '../interfaces/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { AngularFireDatabase } from '@angular/fire/database';
 
-
 @Injectable({
     providedIn: 'root'
 })
@@ -47,12 +46,13 @@ export class UserService {
 
     setAvatar( avatar: string, uid: string ) {
 
-        return this._angularFireDatabase.object( '/users/'+ uid + '/avatar/' ).set(avatar);
+        return this._angularFireDatabase.object( '/users/' + uid + '/avatar/' ).set(avatar);
 
-        // const url = `${ this.urlDataUser}/${ uid }.json`;
+    }
 
-        // return this._httpClient.put( url, avatar );
-
+    addFriend( userId, friendId) {
+        this._angularFireDatabase.object( '/users/' + userId + '/friends/' + friendId ).set( friendId );
+        return this._angularFireDatabase.object( 'users/' + friendId + '/friends/' + userId ).set( userId );
     }
 
 }
