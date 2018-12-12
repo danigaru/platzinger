@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+
 //  recordar images
 import { ImageCropperModule } from 'ngx-image-cropper';
 
@@ -25,13 +27,15 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NopagesComponent } from './components/nopages/nopages.component';
+import { RequestComponent } from './modals/request/request.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    NopagesComponent
+    NopagesComponent,
+    RequestComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +48,12 @@ import { NopagesComponent } from './components/nopages/nopages.component';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule, // imports firebase/storage only needed for storage features,
     // ImageCropperModule
+    BootstrapModalModule.forRoot({container: document.body})
   ],
   providers: [
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ RequestComponent ]
+
 })
 export class AppModule { }
